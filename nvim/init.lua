@@ -6,14 +6,14 @@ vim.loader.enable()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -23,9 +23,7 @@ require("which-key").setup({
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
 	end,
-	opts = {
-
-	}
+	opts = {},
 })
 vim.cmd("colorscheme oxocarbon")
 
@@ -41,18 +39,43 @@ require("telescope").setup({
 	defaults = {
 		mappings = {
 			i = {
-				["<C-h>"] = "which_key"
-			}
-		}
+				["<C-h>"] = "which_key",
+			},
+		},
 	},
 	extensions = {
 		fzf = {
 			fuzzy = true,
 			override_generic_sorter = true,
-      			override_file_sorter = true,
-      			case_mode = "smart_case",
-		}
-	}
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		},
+	},
 })
 require("telescope").load_extension("fzf")
 require("colorizer").setup()
+
+require("conform").setup({
+	formatters_by_ft = {
+		javascript = { "prettierd" },
+		typescript = { "prettierd" },
+		javascriptreact = { "prettierd" },
+		typescriptreact = { "prettierd" },
+		svelte = { "prettierd" },
+		css = { "prettierd" },
+		html = { "prettierd" },
+		json = { "prettierd" },
+		yaml = { "prettierd" },
+		markdown = { "prettierd" },
+		graphql = { "prettierd" },
+		lua = { "stylua" },
+		python = { "isort", "black" },
+	},
+	format_on_save = {
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 500,
+	},
+})
+
+require("dashboard").setup({})
