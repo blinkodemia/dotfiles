@@ -52,4 +52,10 @@ return {
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 	},
+	{ "ms-jpq/chadtree", branch = "chad", build = "python3 -m chadtree deps" },
+	"yamatsum/nvim-cursorline",
+	"andweeb/presence.nvim",
+	"akinsho/bufferline.nvim",
+	"nvim-orgmode/orgmode",
+	"ellisonleao/glow.nvim",
 }
